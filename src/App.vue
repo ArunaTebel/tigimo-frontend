@@ -1,4 +1,7 @@
 <template>
+  <h1 class="text-2xl font-bold underline">
+    Hello world!
+  </h1>
   <div>
     <button v-if="!isAuthenticated" @click="login">Log in</button>
     <button v-if="isAuthenticated" @click="logout">Log out</button>
@@ -24,7 +27,9 @@ export default {
       user,
       isAuthenticated,
       showAccessToken: async () => {
-        document.getElementById('access-token').innerHTML = await getAccessTokenSilently()
+        const accessToken = await getAccessTokenSilently()
+        document.getElementById('access-token').innerHTML = accessToken
+        localStorage.setItem('access-token', accessToken);
       }
     };
   }
