@@ -1,21 +1,32 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <div>
+    <button v-if="!isAuthenticated" @click="login">Log in</button>
+    <button v-if="isAuthenticated" @click="logout">Log out</button>
+    <pre v-if="isAuthenticated"><code>{{ user }}</code></pre>
+    <button v-if="isAuthenticated" @click="showAccessToken">Show Access Token</button>
+    <pre><code id="access-token"></code></pre>
+  </div>
 </template>
+<script>
+import {useAuth0} from '@auth0/auth0-vue';
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+export default {
+  setup() {
+    const {loginWithRedirect, logout, isAuthenticated, user, getAccessTokenSilently} = useAuth0()
+
+    return {
+      login: () => {
+        loginWithRedirect();
+      },
+      logout: () => {
+        logout({returnTo: window.location.origin})
+      },
+      user,
+      isAuthenticated,
+      showAccessToken: async () => {
+        document.getElementById('access-token').innerHTML = await getAccessTokenSilently()
+      }
+    };
+  }
+};
+</script>
