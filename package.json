@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@auth0/auth0-vue": "^1.0.2",
+    "@headlessui/vue": "^1.6.7",
+    "@heroicons/vue": "^1.0.6",
     "vue": "^3.2.25",
     "vue-router": "4"
   },
