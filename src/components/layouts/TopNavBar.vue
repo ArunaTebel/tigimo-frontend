@@ -65,19 +65,16 @@ import ChannelSelector from "../widgets/ChannelSelector.vue";
 export default {
   name: "TopNavBar",
   components: {ChannelSelector},
-  async created() {
-    const {getAccessTokenSilently} = useAuth0()
-    const accessToken = await getAccessTokenSilently()
-    localStorage.setItem('access-token', accessToken);
-  },
   setup() {
-    const {loginWithRedirect, logout, isAuthenticated, user} = useAuth0()
+    const {loginWithRedirect, logout, isAuthenticated, getAccessTokenSilently, user} = useAuth0()
 
     return {
       isAuthenticated,
       user,
-      login: () => {
-        loginWithRedirect();
+      login: async () => {
+        await loginWithRedirect();
+        const accessToken = await getAccessTokenSilently()
+        localStorage.setItem('access-token', accessToken);
       },
       logout: () => {
         logout({returnTo: window.location.origin})
