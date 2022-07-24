@@ -79,7 +79,7 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 import {CheckIcon, SelectorIcon} from '@heroicons/vue/solid'
-import WS from "../../lib/WebService";
+import WS from "../../lib/TigimoWebService";
 
 export default {
   components: {

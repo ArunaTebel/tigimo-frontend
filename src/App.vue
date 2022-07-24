@@ -1,15 +1,15 @@
 <template>
-  <TopNavBar/>
+  <TigimoTopNavBar/>
   <input placeholder="Channel Name" v-model="channelName">
   <input placeholder="Channel Description" v-model="channelDescription">
   <button @click="addChannel">Add Channel</button>
 </template>
 <script>
-import TopNavBar from "./components/layouts/TopNavBar.vue";
-import WS from "./lib/WebService";
+import TigimoTopNavBar from "./components/layouts/TigimoTopNavBar.vue";
+import WS from "./lib/TigimoWebService";
 
 export default {
-  components: {TopNavBar},
+  components: {TigimoTopNavBar},
   data: () => {
     return {
       channelName: '',

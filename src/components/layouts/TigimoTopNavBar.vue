@@ -12,7 +12,7 @@
           <ul class="flex items-center gap-6 text-sm">
             <li>
               <span class="text-gray-500 transition hover:text-gray-500/75">
-                <ChannelSelector v-if="isAuthenticated"/>
+                <TigimoChannelSelector v-if="isAuthenticated"/>
               </span>
             </li>
           </ul>
@@ -60,11 +60,11 @@
 
 <script>
 import {useAuth0} from "@auth0/auth0-vue";
-import ChannelSelector from "../widgets/ChannelSelector.vue";
+import TigimoChannelSelector from "../widgets/TigimoChannelSelector.vue";
 
 export default {
-  name: "TopNavBar",
-  components: {ChannelSelector},
+  name: "TigimoTopNavBar",
+  components: {TigimoChannelSelector},
   setup() {
     const {loginWithRedirect, logout, isAuthenticated, getAccessTokenSilently, user} = useAuth0()
 
@@ -74,9 +74,10 @@ export default {
       login: async () => {
         await loginWithRedirect();
         const accessToken = await getAccessTokenSilently()
-        localStorage.setItem('access-token', accessToken);
+        localStorage.setItem('access-token', accessToken)
       },
       logout: () => {
+        localStorage.removeItem('access-token')
         logout({returnTo: window.location.origin})
       }
     };
