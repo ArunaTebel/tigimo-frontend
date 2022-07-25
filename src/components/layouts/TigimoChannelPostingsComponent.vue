@@ -13,19 +13,24 @@ export default {
     }
   },
   async created() {
-    this.channelPostings = await this.getChannelPostings(this.$route.params.channelId)
+    this.channelPostings = await this
+        .getChannelPostings(
+            this.$route.params.channelId
+        )
   },
   async beforeRouteUpdate(to, from) {
-    this.channelPostings = await this.getChannelPostings(to.params.channelId)
+    this.channelPostings = await this
+        .getChannelPostings(
+            to.params.channelId
+        )
   },
   methods: {
     async getChannelPostings(channelId) {
-      return await WS.models.postings.fetchChannelPostings(channelId)
+      return await WS
+          .models
+          .postings
+          .fetchChannelPostings(channelId)
     }
   }
 }
 </script>
-
-<style scoped>
-
-</style>
