@@ -38,7 +38,7 @@
                 :key="channel._id"
                 :value="channel"
                 v-slot="{ selected, active }"
-                @click="onOptionSelect"
+                @click="onChannelSelect"
             >
               <li
                   class="relative cursor-default select-none py-2 pl-10 pr-4"
@@ -80,8 +80,10 @@ import {
 } from '@headlessui/vue'
 import {CheckIcon, SelectorIcon} from '@heroicons/vue/solid'
 import WS from "../../lib/TigimoWebService";
+import router from "../../router";
 
 export default {
+  name: "TigimoChannelSelector",
   components: {
     Combobox,
     ComboboxInput,
@@ -118,8 +120,8 @@ export default {
     async fetchData() {
       this.channels = await WS.models.channels.fetchAll()
     },
-    async onOptionSelect(event) {
-      console.log(this.selected.name)
+    onChannelSelect() {
+      this.$emit('channelSelectionChanged', this.selected)
     }
 
   }
